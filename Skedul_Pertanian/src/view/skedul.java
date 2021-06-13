@@ -119,14 +119,17 @@ public final class skedul extends javax.swing.JFrame {
         edukasi = new javax.swing.JLabel();
         about = new javax.swing.JLabel();
         home = new javax.swing.JLabel();
+        btnExit = new javax.swing.JLabel();
         bng = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1152, 840));
-        setPreferredSize(new java.awt.Dimension(1152, 840));
+        setMinimumSize(new java.awt.Dimension(1152, 816));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1152, 816));
         setResizable(false);
 
-        jPanel12.setPreferredSize(new java.awt.Dimension(1152, 840));
+        jPanel12.setMinimumSize(new java.awt.Dimension(1158, 816));
+        jPanel12.setPreferredSize(new java.awt.Dimension(1152, 816));
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel12.add(inputJudul, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 210, -1));
         jPanel12.add(inputTanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 210, -1));
@@ -241,6 +244,13 @@ public final class skedul extends javax.swing.JFrame {
         });
         jPanel12.add(home, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 30, 40));
 
+        btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExitMouseClicked(evt);
+            }
+        });
+        jPanel12.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 750, 40, 60));
+
         bng.setForeground(new java.awt.Color(255, 255, 255));
         bng.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/bgn2.png"))); // NOI18N
         jPanel12.add(bng, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -261,6 +271,7 @@ public final class skedul extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void TambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahActionPerformed
@@ -369,8 +380,6 @@ public final class skedul extends javax.swing.JFrame {
         String nim = (String) model.getValueAt(i, 1);
         inputJudul.setText(nim);
         
-        
-        
         String nama = (String) model.getValueAt(i, 3);
         inputNote.setText(nama);
     }//GEN-LAST:event_tabelSkedulMouseClicked
@@ -389,7 +398,15 @@ public final class skedul extends javax.swing.JFrame {
 
     private void edukasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edukasiMouseClicked
         // TODO add your handling code here:
+        education e = new education();
+        e.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_edukasiMouseClicked
+
+    private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_btnExitMouseClicked
 
     
     /**
@@ -433,6 +450,7 @@ public final class skedul extends javax.swing.JFrame {
     private javax.swing.JButton Tambah;
     private javax.swing.JLabel about;
     private javax.swing.JLabel bng;
+    private javax.swing.JLabel btnExit;
     private javax.swing.JLabel edukasi;
     private javax.swing.JLabel home;
     private javax.swing.JTextField inputJudul;
