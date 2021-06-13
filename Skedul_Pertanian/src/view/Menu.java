@@ -5,6 +5,8 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author MSI GF75
@@ -31,6 +33,7 @@ public class Menu extends javax.swing.JFrame {
         edukasi = new javax.swing.JLabel();
         skedul = new javax.swing.JLabel();
         about = new javax.swing.JLabel();
+        closeProgram = new javax.swing.JLabel();
         bgn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -65,6 +68,13 @@ public class Menu extends javax.swing.JFrame {
         });
         jPanel1.add(about, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 550, 50, 50));
 
+        closeProgram.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                closeProgramMouseClicked(evt);
+            }
+        });
+        jPanel1.add(closeProgram, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 690, 70, 100));
+
         bgn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/bgn1.png"))); // NOI18N
         jPanel1.add(bgn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 820));
 
@@ -80,10 +90,15 @@ public class Menu extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void edukasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edukasiMouseClicked
         // TODO add your handling code here:
+        education e = new education();
+        e.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_edukasiMouseClicked
 
     private void skedulMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_skedulMouseClicked
@@ -97,6 +112,11 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_aboutMouseClicked
+
+    private void closeProgramMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeProgramMouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_closeProgramMouseClicked
 
     /**
      * @param args the command line arguments
@@ -136,6 +156,7 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel about;
     private javax.swing.JLabel bgn;
+    private javax.swing.JLabel closeProgram;
     private javax.swing.JLabel edukasi;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel skedul;
