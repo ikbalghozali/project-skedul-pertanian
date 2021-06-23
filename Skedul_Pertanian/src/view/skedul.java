@@ -10,9 +10,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -22,7 +26,7 @@ import javax.swing.table.TableColumn;
  */
 public final class skedul extends javax.swing.JFrame {
     
-    public void tanggal(){
+   public void tanggal(){
         Date ys = new Date();
         SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy");
         txttgl.setText(s.format(ys));
@@ -102,11 +106,11 @@ public final class skedul extends javax.swing.JFrame {
 
         jPanel12 = new javax.swing.JPanel();
         inputJudul = new javax.swing.JTextField();
-        inputTanggal = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         inputNote = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelSkedul = new javax.swing.JTable();
+        inputTanggal = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -123,19 +127,19 @@ public final class skedul extends javax.swing.JFrame {
         bng = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1152, 816));
+        setMinimumSize(new java.awt.Dimension(1152, 818));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1152, 816));
         setResizable(false);
 
-        jPanel12.setMinimumSize(new java.awt.Dimension(1158, 816));
-        jPanel12.setPreferredSize(new java.awt.Dimension(1152, 816));
+        jPanel12.setMinimumSize(new java.awt.Dimension(1158, 818));
+        jPanel12.setPreferredSize(new java.awt.Dimension(1152, 818));
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel12.add(inputJudul, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 210, -1));
-        jPanel12.add(inputTanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 210, -1));
 
         inputNote.setColumns(20);
+        inputNote.setLineWrap(true);
         inputNote.setRows(5);
+        inputNote.setWrapStyleWord(true);
         jScrollPane1.setViewportView(inputNote);
 
         jPanel12.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 380, 210, 130));
@@ -170,6 +174,7 @@ public final class skedul extends javax.swing.JFrame {
         }
 
         jPanel12.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 240, 470, -1));
+        jPanel12.add(inputTanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 210, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -282,6 +287,7 @@ public final class skedul extends javax.swing.JFrame {
         String judul = inputJudul.getText();
         String note = inputNote.getText();
 
+
         
         try{
             Connection c = KoneksiDatabase.getKoneksi();
@@ -297,7 +303,10 @@ public final class skedul extends javax.swing.JFrame {
             p.executeUpdate();
             p.close();
             JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan");
-            
+//            inputJudul.setText("");
+//            inputNote.setText("");
+//            inputTanggal.setDateFormatString("");
+                    
         }catch(SQLException e){
             System.out.println("Terjadi error tambah");
         }finally{
@@ -324,10 +333,16 @@ public final class skedul extends javax.swing.JFrame {
             p.executeUpdate();
             p.close();
             JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
+//            inputJudul.setText("");
+//            inputNote.setText("");
+//            inputTanggal.setDateFormatString("");
             
-        }catch(SQLException e){
+//        }catch(SQLException e){
             System.out.println("Terjadi error hapus");
-        }finally{
+        } catch (SQLException ex)
+       {
+           Logger.getLogger(skedul.class.getName()).log(Level.SEVERE, null, ex);
+       }finally{
             loadData();
         }
     }//GEN-LAST:event_HapusActionPerformed
@@ -368,7 +383,22 @@ public final class skedul extends javax.swing.JFrame {
             loadData();
         }
     }//GEN-LAST:event_EditActionPerformed
-
+    
+    public static Date getTanggal(JTable table, int kolom){
+        JTable tabel = table;
+        String inputTanggal = String.valueOf(tabel.getValueAt(tabel.getSelectedRow(), kolom));
+        Date tanggal = null;
+        try
+        {
+            tanggal = new SimpleDateFormat("dd-MM-yyyy").parse(inputTanggal);
+            
+        } catch (ParseException ex)
+        {
+            Logger.getLogger(skedul.class.getName()).log(Level.SEVERE,null,ex);
+        }
+        return tanggal;
+    }
+    
     private void tabelSkedulMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelSkedulMouseClicked
         // TODO add your handling code here:
         int i = tabelSkedul.getSelectedRow();
@@ -379,7 +409,7 @@ public final class skedul extends javax.swing.JFrame {
          
         String nim = (String) model.getValueAt(i, 1);
         inputJudul.setText(nim);
-        
+        inputTanggal.setDate(getTanggal(tabelSkedul,2));
         String nama = (String) model.getValueAt(i, 3);
         inputNote.setText(nama);
     }//GEN-LAST:event_tabelSkedulMouseClicked
@@ -394,6 +424,9 @@ public final class skedul extends javax.swing.JFrame {
 
     private void aboutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutMouseClicked
         // TODO add your handling code here:
+        about a = new about();
+        a.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_aboutMouseClicked
 
     private void edukasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edukasiMouseClicked
@@ -405,7 +438,12 @@ public final class skedul extends javax.swing.JFrame {
 
     private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
         // TODO add your handling code here:
-        System.exit(0);
+        int jawab = JOptionPane.showConfirmDialog(null, "Apakah Mau Keluar","Warning!!", JOptionPane.YES_NO_OPTION);
+        if(jawab == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
+        
+        
     }//GEN-LAST:event_btnExitMouseClicked
 
     
