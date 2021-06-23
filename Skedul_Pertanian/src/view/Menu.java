@@ -38,13 +38,12 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximizedBounds(new java.awt.Rectangle(1010, 670, 670, 670));
-        setMaximumSize(new java.awt.Dimension(1152, 816));
+        setMaximumSize(new java.awt.Dimension(1152, 818));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1152, 816));
         setResizable(false);
 
-        jPanel1.setMinimumSize(new java.awt.Dimension(1152, 816));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1152, 816));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1152, 840));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1152, 818));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         edukasi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -86,7 +85,7 @@ public class Menu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 816, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -110,12 +109,18 @@ public class Menu extends javax.swing.JFrame {
 
     private void aboutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutMouseClicked
         // TODO add your handling code here:
+        about a = new about();
+        a.setVisible(true);
+        this.dispose();
         
     }//GEN-LAST:event_aboutMouseClicked
 
     private void closeProgramMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeProgramMouseClicked
         // TODO add your handling code here:
-        System.exit(0);
+        int jawab = JOptionPane.showConfirmDialog(null, "Apakah Mau Keluar","Warning!!", JOptionPane.YES_NO_OPTION);
+        if(jawab == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
     }//GEN-LAST:event_closeProgramMouseClicked
 
     /**
