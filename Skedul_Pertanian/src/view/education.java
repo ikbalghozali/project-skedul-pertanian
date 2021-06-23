@@ -49,14 +49,13 @@ public class education extends javax.swing.JFrame {
         bng = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1152, 816));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1152, 816));
+        setPreferredSize(new java.awt.Dimension(1152, 818));
 
-        jPanel12.setMinimumSize(new java.awt.Dimension(1170, 816));
-        jPanel12.setPreferredSize(new java.awt.Dimension(1152, 816));
+        jPanel12.setMinimumSize(new java.awt.Dimension(1170, 818));
+        jPanel12.setPreferredSize(new java.awt.Dimension(1152, 818));
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel12.add(scrollPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 570, 730));
+        jPanel12.add(scrollPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 570, 720));
 
         jLabel2.setText("Pilih File edukasi Pertanian :");
         jPanel12.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, -1));
@@ -145,6 +144,9 @@ public class education extends javax.swing.JFrame {
 
     private void aboutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutMouseClicked
         // TODO add your handling code here:
+        about a = new about();
+        a.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_aboutMouseClicked
 
     private void homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeMouseClicked
@@ -187,7 +189,10 @@ public class education extends javax.swing.JFrame {
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
-        System.exit(0);
+        int jawab = JOptionPane.showConfirmDialog(null, "Apakah Mau Keluar","Warning!!", JOptionPane.YES_NO_OPTION);
+        if(jawab == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
     }//GEN-LAST:event_jLabel3MouseClicked
 
     /**
@@ -244,14 +249,14 @@ public class education extends javax.swing.JFrame {
     private void openpdf(String file) {
         try {
             SwingController control = new SwingController();
-            SwingViewBuilder factry = new SwingViewBuilder(control);
-            JPanel viewerCompntpn1 = factry.buildViewerPanel();
+            SwingViewBuilder view = new SwingViewBuilder(control);
+            JPanel viewerCompntpn1 = view.buildViewerPanel();
             ComponentKeyBinding.install(control,viewerCompntpn1);
             control.getDocumentViewController().setAnnotationCallback(new org.icepdf.ri.common.MyAnnotationCallback(control.getDocumentViewController()));
             control.openDocument(file);
             scrollPanel.setViewportView(viewerCompntpn1);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Cannot Load .PDF");
+            JOptionPane.showMessageDialog(this, "Tidak dapat membuka file .pdf");
         }
     }
 }
