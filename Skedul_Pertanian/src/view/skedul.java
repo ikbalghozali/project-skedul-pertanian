@@ -302,11 +302,7 @@ public final class skedul extends javax.swing.JFrame {
             
             p.executeUpdate();
             p.close();
-            JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan");
-//            inputJudul.setText("");
-//            inputNote.setText("");
-//            inputTanggal.setDateFormatString("");
-                    
+            JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan");                
         }catch(SQLException e){
             System.out.println("Terjadi error tambah");
         }finally{
@@ -333,14 +329,9 @@ public final class skedul extends javax.swing.JFrame {
             p.executeUpdate();
             p.close();
             JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
-//            inputJudul.setText("");
-//            inputNote.setText("");
-//            inputTanggal.setDateFormatString("");
             
-//        }catch(SQLException e){
-            System.out.println("Terjadi error hapus");
         } catch (SQLException ex)
-       {
+       {System.out.println("Terjadi error hapus");
            Logger.getLogger(skedul.class.getName()).log(Level.SEVERE, null, ex);
        }finally{
             loadData();
